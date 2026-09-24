@@ -7,6 +7,7 @@ const store=()=>getStore({name:'ttil-commerce',consistency:'strong'});
 const env=(key)=>globalThis.Netlify?.env?.get(key)||process.env[key]||'';
 const supabase=()=>{const url=env('SUPABASE_URL'),key=env('SUPABASE_SERVICE_ROLE_KEY');return url&&key?createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}}):null;};
 const MEDIA_BUCKET='ttil-media';
+let fallbackState=null;
 const now=()=>new Date().toISOString();
 const clean=(v,max=200)=>String(v??'').trim().slice(0,max);
 const num=(v,min,max)=>{const n=Number(v);if(!Number.isFinite(n)||n<min||n>max)throw fault('Enter a valid number.');return n;};
@@ -43,8 +44,8 @@ function seed(){
   ],orders:[],discounts:[],activity:[],rates:{}
  };
 }
-async function load(){const db=supabase();if(db){const {data,error}=await db.from('ttil_state').select('state').eq('id','main').maybeSingle();if(error)throw fault('Supabase database is not configured correctly.',503);if(data?.state){const state=data.state;if(normalize(state))await save(state);return state;}const state=seed();const result=await db.from('ttil_state').upsert({id:'main',state,updated_at:now()});if(result.error)throw fault('Supabase database could not be initialized.',503);return state;}const s=store();let state=await s.get('state-v1',{type:'json'});if(!state){state=seed();await s.setJSON('state-v1',state);}else if(normalize(state))await s.setJSON('state-v1',state);return state;}
-const save=async state=>{const db=supabase();if(db){const {error}=await db.from('ttil_state').upsert({id:'main',state,updated_at:now()});if(error)throw fault('Supabase database could not save this change.',503);return;}return store().setJSON('state-v1',state);};
+async function load(){const db=supabase();if(db){const {data,error}=await db.from('ttil_state').select('state').eq('id','main').maybeSingle();if(error)throw fault('Supabase database is not configured correctly.',503);if(data?.state){const state=data.state;if(normalize(state))await save(state);return state;}const state=seed();const result=await db.from('ttil_state').upsert({id:'main',state,updated_at:now()});if(result.error)throw fault('Supabase database could not be initialized.',503);return state;}if(globalThis.Netlify){const s=store();let state=await s.get('state-v1',{type:'json'});if(!state){state=seed();await s.setJSON('state-v1',state);}else if(normalize(state))await s.setJSON('state-v1',state);return state;}if(!fallbackState){fallbackState=seed();fallbackState.settings.acceptOrders=false;fallbackState.settings.shippingNote='The collection is available to browse. Ordering will open when the store database is connected.';}return fallbackState;}
+const save=async state=>{const db=supabase();if(db){const {error}=await db.from('ttil_state').upsert({id:'main',state,updated_at:now()});if(error)throw fault('Supabase database could not save this change.',503);return;}if(globalThis.Netlify)return store().setJSON('state-v1',state);throw fault('The store database is not connected on this deployment.',503);};
 function log(state,actor,action){state.activity.unshift({id:randomUUID(),actor,action,at:now()});state.activity=state.activity.slice(0,100);}
 function routePath(req){const url=new URL(req.url),forwarded=url.searchParams.get('path');if(forwarded)return `/${forwarded.replace(/^\/+|\/+$/g,'')}`;return url.pathname.replace(/^\/\.netlify\/functions\/api/,'').replace(/^\/api/,'')||'/';}
 function cookie(req,name){return (req.headers.get('cookie')||'').split(';').map(x=>x.trim().split('=')).find(([k])=>k===name)?.[1]||'';}
