@@ -1,0 +1,78 @@
+{
+  "tool": "Built-in image generation",
+  "images": [
+    {
+      "key": "hero",
+      "refs": [
+        "C:\\Users\\laith\\Documents\\Codex\\2026-09-23\\want\\outputs\\ttil-guideline-assets\\ttil-logo-reference.png",
+        "C:\\Users\\laith\\Downloads\\download (8).jpg",
+        "C:\\Users\\laith\\Downloads\\Team BTS for DELAROQ shoot.jpg"
+      ],
+      "prompt": "Generate a stunning ultra-realistic luxury independent clothing campaign photograph, landscape 3:2. TTIL is a premium unisex independent Jordan streetwear brand, not a space-themed brand. Preserve the supplied small illustrated yellow hat-character logo as branding only. No planets, moons, stars, space, orbital decoration. Super realistic cotton, ribbing, ink texture, seams. Garments are placeholders for a premium store. No added labels or watermarks. Three EXACT outfits: 1 washed black oversized hoodie, small yellow supplied logo on left chest, blank elsewhere, charcoal baggy jeans. 2 faded slate blue oversized hoodie with a large off-center cream and faded coral abstract distorted photographic human face screen-print, NOT celestial, no large mascot, blue-gray jeans. 3 washed black oversized t-shirt with a distressed rectangular black-and-white photographic print of a blurry anonymous person in a doorway on front and tiny yellow TTIL lettering, black trousers. Three clearly adult Middle Eastern models aged 21-25, two men and one woman, together in a working photographic studio. All clothes clearly visible from the front, one seated on a low equipment case, two standing naturally, no forced posing. Models at CENTER and CENTER RIGHT occupying 70% of the frame height with generous space to the left for webpage text. Camera about waist level, honest medium-format photography, visible skin pores, actual cotton folds, no plastic skin. Huge pale warm gray seamless cyclorama, overhead softbox visible at top, one large black softbox and c-stand visible on left edge, subtle taped cables at floor edges. Refined behind-the-scenes realism like supplied studio references, less clutter; no laptops in foreground. Gentle directional studio flash, medium contrast, neutral warmth, slightly analog grain. High fashion catalog quality, extremely convincing photograph. No typography printed on the photo. Keep all three within central 70 percent width so mobile crop still shows group."
+    },
+    {
+      "key": "hoodie-black",
+      "refs": [
+        "C:\\Users\\laith\\Documents\\Codex\\2026-09-23\\want\\outputs\\ttil-guideline-assets\\ttil-logo-reference.png"
+      ],
+      "prompt": "Create one extraordinarily realistic front-view flat lay e-commerce product photo. TTIL is a premium unisex independent Jordan streetwear brand, not a space-themed brand. Preserve the supplied small illustrated yellow hat-character logo as branding only. No planets, moons, stars, space, orbital decoration. Super realistic cotton, ribbing, ink texture, seams. Garments are placeholders for a premium store. No added labels or watermarks. Only one washed black oversized heavyweight hoodie with small yellow supplied illustrated TTIL mark on left chest, quiet blank body, kangaroo pocket, dropped shoulders, ribbed cuffs. Very convincing soft cotton fleece and washed edges. Neatly arranged, sleeves slightly down, whole hoodie inside frame. Light neutral gray seamless background #eeede9, soft studio shadow, no props, no text overlays. Portrait 4:5."
+    },
+    {
+      "key": "hoodie-blue",
+      "refs": [
+        "C:\\Users\\laith\\Documents\\Codex\\2026-09-23\\want\\outputs\\ttil-guideline-assets\\ttil-logo-reference.png"
+      ],
+      "prompt": "Create one extraordinarily realistic front-view flat lay e-commerce product photo. TTIL is a premium unisex independent Jordan streetwear brand, not a space-themed brand. Preserve the supplied small illustrated yellow hat-character logo as branding only. No planets, moons, stars, space, orbital decoration. Super realistic cotton, ribbing, ink texture, seams. Garments are placeholders for a premium store. No added labels or watermarks. Only one faded slate blue oversized heavyweight hoodie with a large off-center cream and faded coral abstract distorted photographic human face screen-print on chest, NOT celestial and no large mascot. Thin small handwritten TTIL just beneath artwork. Kangaroo pocket, dropped shoulders, ribbed cuffs. Extremely realistic faded screen ink, washed cotton fleece. Neatly arranged, sleeves slightly down, whole hoodie inside frame. Light neutral gray seamless background #eeede9, soft studio shadow, no props, no text overlays. Portrait 4:5."
+    },
+    {
+      "key": "tee",
+      "refs": [
+        "C:\\Users\\laith\\Documents\\Codex\\2026-09-23\\want\\outputs\\ttil-guideline-assets\\tshirt-01-memory-print.png"
+      ],
+      "prompt": "Create one extraordinarily realistic front-view flat lay e-commerce product photo. TTIL is a premium unisex independent Jordan streetwear brand, not a space-themed brand. Preserve the supplied small illustrated yellow hat-character logo as branding only. No planets, moons, stars, space, orbital decoration. Super realistic cotton, ribbing, ink texture, seams. Garments are placeholders for a premium store. No added labels or watermarks. Only one washed black oversized heavyweight T-shirt with distressed rectangular black-and-white photographic print of a blurry anonymous person in a doorway on FRONT and tiny yellow TTIL lettering. Use reference tee front as design reference, remove orbit and star graphics, keep the blurry photo. Broad neck rib, dropped shoulders, very convincing cotton texture. Neatly arranged, whole T-shirt inside frame. Light neutral gray seamless background #eeede9, soft studio shadow, no props, no text overlays. Portrait 4:5."
+    }
+  ],
+  "onModelRevision": {
+    "status": "Completed as three front/back model diptychs; the storefront hero now uses a real user-supplied studio photograph.",
+    "prompts": [
+      {
+        "key": "hoodie-black",
+        "refs": [
+          "C:/Users/laith/.codex/generated_images/01a0cff8-7f63-7a52-8098-64bec7b6aafa/exec-ef4e5546-7876-4556-a14e-60116430c731.png"
+        ],
+        "prompt": "Use case: photorealistic-natural. Premium fashion ecommerce on-model photograph, portrait 4:5. Reference is the EXACT GARMENT to preserve, not the image composition. Put this identical garment on adult Jordanian male model aged 24, closely cropped dark hair, olive skin, calm expression, natural stance, hands casually at his sides, charcoal oversized jeans. Frame head to upper shins; clothing occupies most of photo, whole garment and hands visible. Plain warm gray seamless photography studio, soft shadow on floor, no furniture, no props. Quiet elevated contemporary streetwear editorial, realistic 85mm medium-format photograph, subtly directional large softbox from upper left, natural shadow, visible skin pores and flyaway hair, dense matte washed cotton, beautifully natural gravity folds, accurate seams and ribbed cuffs, print conforms to fabric without floating. Preserve exact graphic, garment silhouette, color and print placement from reference. No airbrushing, CGI, beauty filter, oversharpening, text overlays, magazine graphics, borders, artificial glow, flat lay or mannequin. This is a convincing real photograph of a human wearing this product, restrained and expensive looking."
+      },
+      {
+        "key": "hoodie-blue",
+        "refs": [
+          "C:/Users/laith/.codex/generated_images/01a0cff8-7f63-7a52-8098-64bec7b6aafa/exec-106a0317-9a14-441b-8f5f-bfb524adbea8.png"
+        ],
+        "prompt": "Use case: photorealistic-natural. Premium fashion ecommerce on-model photograph, portrait 4:5. Reference is the EXACT GARMENT to preserve, not the image composition. Put this identical garment on adult Jordanian female model aged 24, dark loosely tied hair, real unretouched olive skin, quiet confident expression, relaxed straight-on standing pose, faded charcoal wide leg jeans. Frame head to upper shins; clothing occupies most of photo, whole garment and hands visible. Plain warm gray seamless photography studio, soft shadow on floor, no furniture, no props. Quiet elevated contemporary streetwear editorial, realistic 85mm medium-format photograph, subtly directional large softbox from upper left, natural shadow, visible skin pores and flyaway hair, dense matte washed cotton, beautifully natural gravity folds, accurate seams and ribbed cuffs, print conforms to fabric without floating. Preserve exact graphic, garment silhouette, color and print placement from reference. No airbrushing, CGI, beauty filter, oversharpening, text overlays, magazine graphics, borders, artificial glow, flat lay or mannequin. This is a convincing real photograph of a human wearing this product, restrained and expensive looking."
+      },
+      {
+        "key": "tee",
+        "refs": [
+          "C:/Users/laith/.codex/generated_images/01a0cff8-7f63-7a52-8098-64bec7b6aafa/exec-8695d4d9-5443-4894-a7e0-4f35d574727e.png"
+        ],
+        "prompt": "Use case: photorealistic-natural. Premium fashion ecommerce on-model photograph, portrait 4:5. Reference is the EXACT GARMENT to preserve, not the image composition. Put this identical garment on adult Jordanian male model aged 23, slightly long dark curly hair, olive skin, natural small facial imperfections, relaxed standing pose turned 10 degrees, washed charcoal loose trousers. Frame head to upper shins; clothing occupies most of photo, whole garment and hands visible. Plain warm gray seamless photography studio, soft shadow on floor, no furniture, no props. Quiet elevated contemporary streetwear editorial, realistic 85mm medium-format photograph, subtly directional large softbox from upper left, natural shadow, visible skin pores and flyaway hair, dense matte washed cotton, beautifully natural gravity folds, accurate seams and ribbed cuffs, print conforms to fabric without floating. Preserve exact graphic, garment silhouette, color and print placement from reference. No airbrushing, CGI, beauty filter, oversharpening, text overlays, magazine graphics, borders, artificial glow, flat lay or mannequin. This is a convincing real photograph of a human wearing this product, restrained and expensive looking."
+      }
+    ],
+    "outputs": [
+      "exec-b2e9d209-01fb-43ab-9975-5009f6e166e7.png",
+      "exec-a1632d71-7667-47ff-b4c9-111957c19d85.png",
+      "exec-8d601db6-38c0-4aa5-9360-992718c24e2b.png"
+    ],
+    "note": "Each diptych was split into separate front and back WebP gallery images. Generated product photos remain provisional until a real sample shoot."
+  },
+  "homepageEditorialRevision": {
+    "status": "Completed",
+    "asset": "public/media/ttil-mercedes.webp",
+    "refs": [
+      "C:/Users/laith/Downloads/Vintage cars.jpg",
+      "C:/Users/laith/AppData/Local/Temp/codex-clipboard-a07c467c-6c3b-4c73-a293-b0fe32f9ad9d.png"
+    ],
+    "prompt": "Photorealistic premium streetwear campaign image: a glossy late-1970s black Mercedes photographed at night in an Amman courtyard, with a washed black TTIL hoodie naturally draped across the hood. The hoodie carries a new original warped four-point graphic in muted yellow, faded coral, warm white and slate blue, plus a small yellow TTIL mascot at the cuff. Realistic reflections, cotton folds, restrained analog grain, no people, no visible license plate, no added text or watermark.",
+    "placement": "Good Taste homepage section",
+    "note": "The homepage journal now uses only the distinct Amman street and black-and-white studio-making images; the repeated garment-rail image was removed."
+  }
+}
