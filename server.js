@@ -66,7 +66,8 @@ put('settings','store',upgradedSettings);
 export function seedAccounts(accounts){ if(db.prepare('SELECT COUNT(*) n FROM users').get().n)throw fail('Accounts are already configured.');txn(()=>{for(const [username,password] of Object.entries(accounts)){if(!['ibra','Laith'].includes(username))throw fail('Only the two authorized accounts may be created.');db.prepare('INSERT INTO users VALUES(?,?,?)').run(randomUUID(),username,passwordHash(password));}}); }
 export const app=express();
 app.disable('x-powered-by');
-app.use(helmet({contentSecurityPolicy:{directives:{defaultSrc:["'self'"],scriptSrc:["'self'"],styleSrc:["'self'","'unsafe-inline'"],imgSrc:["'self'",'data:','blob:'],connectSrc:["'self'",'ws://localhost:*','ws://127.0.0.1:*'],fontSrc:["'self'"],objectSrc:["'none'"],frameAncestors:["'none'"],upgradeInsecureRequests:null}},crossOriginEmbedderPolicy:false,strictTransportSecurity:process.env.NODE_ENV==='production'?undefined:false}));
+const isProduction=process.argv.includes('--production')||process.env.NODE_ENV==='production';
+app.use(helmet({contentSecurityPolicy:isProduction?{directives:{defaultSrc:["'self'"],scriptSrc:["'self'"],styleSrc:["'self'","'unsafe-inline'"],imgSrc:["'self'",'data:','blob:'],connectSrc:["'self'"],fontSrc:["'self'"],objectSrc:["'none'"],frameAncestors:["'none'"],upgradeInsecureRequests:null}}:false,crossOriginEmbedderPolicy:false,strictTransportSecurity:isProduction?undefined:false}));
 app.use('/api',(_req,res,next)=>{res.set('Cache-Control','no-store');next();});
 app.use(express.json({limit:'128kb'}));
 app.use((req,res,next)=>{if(['POST','PUT','PATCH','DELETE'].includes(req.method)){const origin=req.headers.origin;const allowed=process.env.PUBLIC_ORIGIN||`${req.protocol}://${req.get('host')}`;if(origin && origin!==allowed)return res.status(403).json({error:'Request origin is not allowed.'});}next();});
