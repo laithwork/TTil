@@ -17,19 +17,24 @@ const hashPassword=password=>{const salt=randomBytes(16).toString('hex');return 
 const checkPassword=(password,hash)=>{const [salt,key]=hash.split(':');const actual=scryptSync(password,salt,64),expected=Buffer.from(key,'hex');return actual.length===expected.length&&timingSafeEqual(actual,expected);};
 const security={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY','Referrer-Policy':'strict-origin-when-cross-origin'};
 const json=(body,status=200,extra={})=>new Response(JSON.stringify(body),{status,headers:{...security,'Content-Type':'application/json; charset=utf-8',...extra}});
-const homepageDefaults={name:'TTIL',currency:'JOD',announcement:'Things that we like. Made to be worn.',heroEyebrow:'COLLECTION 001 / JORDAN',heroTitle:'Good things.\nWorn your way.',heroCta:'Explore collection 001',heroFoot:'TTIL / STUDIO SERIES 001',heroImage:'/media/ttil-hero-wide.webp',collectionTitle:'The first collection.',collectionSubtitle:'Two hoodies. One tee. All us.',journalLabel:'Studio and street / 001',journalTitle:'Made here. Worn outside.',journalBody:'Three pieces, one quiet studio and the streets we know. A first collection built around the things we keep coming back to.',journalImage1:'/media/ttil-rack-simple.webp',journalImage2:'/media/ttil-street.webp',journalImage3:'/media/ttil-making.webp',storyLabel:'A note from us',storyTitle:'Good taste. Your own kind.',storyCta:'Find your thing',storyImage:'/media/ttil-mercedes.webp',deliveryTitle:'Delivered in Jordan',deliverySubtitle:'Cash on delivery',fitTitle:'Wear it your way',fitSubtitle:'Unisex, relaxed silhouettes',fitCta:'Find your fit',footerTagline:'From our world to your wardrobe.'};
+const homepageDefaults={name:'TTIL',currency:'JOD',announcement:'Things that we like. Made to be worn.',heroEyebrow:'COLLECTION 001 / JORDAN',heroTitle:'Good things.\nWorn your way.',heroCta:'Explore collection 001',heroFoot:'TTIL / STUDIO SERIES 001',heroImage:'/media/ttil-hero-wide.webp',collectionTitle:'The first collection.',collectionSubtitle:'Five pieces. Studio and street. All us.',journalLabel:'Studio and street / 001',journalTitle:'Made here. Worn outside.',journalBody:'Five pieces, one quiet studio and the streets we know. A first collection built around the things we keep coming back to.',journalImage1:'/media/ttil-rack-simple.webp',journalImage2:'/media/ttil-street.webp',journalImage3:'/media/ttil-making.webp',storyLabel:'A note from us',storyTitle:'Good taste. Your own kind.',storyCta:'Find your thing',storyImage:'/media/ttil-mercedes.webp',deliveryTitle:'Delivered in Jordan',deliverySubtitle:'Cash on delivery',fitTitle:'Wear it your way',fitSubtitle:'Unisex, relaxed silhouettes',fitCta:'Find your fit',footerTagline:'From our world to your wardrobe.'};
+const variants=(slug,color,hex)=>['S','M','L','XL'].map((size,i)=>({id:`${slug}-${size.toLowerCase()}`,color,hex,size,stock:[6,10,8,4][i],sku:`TTIL-${slug.toUpperCase()}-${size}`}));
+const newDesignProducts=()=>[
+ {id:'caravan-hoodie',name:'Caravan heavyweight hoodie',caption:'Made for the road between here and home.',description:'A washed black oversized hoodie with a distressed camel caravan graphic. Heavyweight cotton, dropped shoulders, a roomy kangaroo pocket and a soft lived-in finish.',price:54,compareAt:0,category:'Hoodies',status:'active',images:['/media/camel-hoodie-street.webp','/media/camel-hoodie-studio.webp','/media/camel-hoodie-macro.webp'],image:'/media/camel-hoodie-street.webp',sort:3,variants:variants('CH','Washed black','#30302f'),updatedAt:randomUUID()},
+ {id:'heritage-star-hoodie',name:'Heritage star hoodie',caption:'A familiar story, worn forward.',description:'A washed black oversized hoodie carrying a distressed red-star heritage graphic. Heavyweight cotton, relaxed proportions and a substantial ribbed finish.',price:56,compareAt:0,category:'Hoodies',status:'active',images:['/media/heritage-hoodie-street.webp','/media/heritage-hoodie-studio.webp','/media/heritage-hoodie-macro.webp'],image:'/media/heritage-hoodie-street.webp',sort:4,variants:variants('HS','Washed black','#2d2d2c'),updatedAt:randomUUID()}
+];
 function normalize(state){
- const before=JSON.stringify(state.settings||{}),oldHero=['/media/ttil-hero-original.png','/media/studio-wide.webp','/media/ttil-hero-real.webp','/media/ttil-rack-simple.webp'];
+ const before=JSON.stringify(state.settings||{}),oldHero=['/media/ttil-hero-original.png','/media/studio-wide.webp','/media/ttil-hero-real.webp','/media/ttil-rack-simple.webp'];let changed=false;
  state.settings={...homepageDefaults,...state.settings};
  if(state.settings.seedData&&oldHero.includes(state.settings.heroImage))state.settings.heroImage=homepageDefaults.heroImage;
  if(state.settings.seedData&&state.settings.journalImage3==='/media/ttil-hero-real.webp')state.settings.journalImage3=homepageDefaults.journalImage3;
  if(state.settings.seedData&&['/media/ttil-rack-simple.webp','/media/ttil-making.webp'].includes(state.settings.storyImage))state.settings.storyImage=homepageDefaults.storyImage;
  if(state.settings.seedData&&state.settings.acceptOrders===false&&!state.orders?.length)state.settings.acceptOrders=true;
- return before!==JSON.stringify(state.settings);
+ if(state.settings.seedData){for(const product of newDesignProducts())if(!state.products.some(p=>p.id===product.id)){state.products.push(product);changed=true;}}
+ return changed||before!==JSON.stringify(state.settings);
 }
 
 function seed(){
- const variants=(slug,color,hex)=>['S','M','L','XL'].map((size,i)=>({id:`${slug}-${size.toLowerCase()}`,color,hex,size,stock:[6,10,8,4][i],sku:`TTIL-${slug.toUpperCase()}-${size}`}));
  return {
   version:1,
   users:[
@@ -40,7 +45,8 @@ function seed(){
   products:[
    {id:'washed-hoodie',name:'Everyday heavyweight hoodie',caption:'The one you keep reaching for.',description:'A washed black oversized hoodie with a small TTIL signature. Dropped shoulders, a relaxed body and a substantial ribbed hem.',price:48,compareAt:0,category:'Hoodies',status:'active',images:['/media/washed-hoodie-front.webp','/media/washed-hoodie-back.webp'],image:'/media/washed-hoodie-front.webp',sort:0,variants:variants('WH','Washed black','#343535'),updatedAt:randomUUID()},
    {id:'afterimage-hoodie',name:'Afterimage graphic hoodie',caption:'A little out of focus.',description:'A faded slate hoodie with an oversized abstract print. An easy unisex silhouette with a kangaroo pocket and dropped shoulders.',price:52,compareAt:0,category:'Hoodies',status:'active',images:['/media/afterimage-hoodie-front.webp','/media/afterimage-hoodie-back.webp'],image:'/media/afterimage-hoodie-front.webp',sort:1,variants:variants('AH','Faded slate','#737f88'),updatedAt:randomUUID()},
-   {id:'memory-tee',name:'Memory print tee',caption:'Some things stay with you.',description:'A relaxed black T-shirt with a distressed photographic print. A generous cut and a substantial ribbed neckline.',price:28,compareAt:0,category:'T-shirts',status:'active',images:['/media/memory-tee-front.webp','/media/memory-tee-back.webp'],image:'/media/memory-tee-front.webp',sort:2,variants:variants('MT','Washed black','#343535'),updatedAt:randomUUID()}
+   {id:'memory-tee',name:'Memory print tee',caption:'Some things stay with you.',description:'A relaxed black T-shirt with a distressed photographic print. A generous cut and a substantial ribbed neckline.',price:28,compareAt:0,category:'T-shirts',status:'active',images:['/media/memory-tee-front.webp','/media/memory-tee-back.webp'],image:'/media/memory-tee-front.webp',sort:2,variants:variants('MT','Washed black','#343535'),updatedAt:randomUUID()},
+   ...newDesignProducts()
   ],orders:[],discounts:[],activity:[],rates:{}
  };
 }
