@@ -12,13 +12,13 @@ export function CampaignHero({settings,product}){
  const opacity=useTransform(scrollYProgress,[0,.7],[1,0]);
  return <section className="hero campaign-hero landing-hero" ref={target}>
   <h1 className="visually-hidden">Things That I Like</h1>
-  <div className="landing-artwork" aria-hidden="true" />
+  <div className="landing-artwork" aria-hidden="true" style={settings.campaignImage?{backgroundImage:`url("${settings.campaignImage}")`}:undefined}/>
   {product&&<motion.a className="landing-product" href={`/products/${product.id}`} initial={reduce?false:{opacity:0,y:12}} animate={{opacity:1,y:0}} whileTap={reduce?{}:{scale:.98}} transition={{type:'spring',bounce:0,duration:.35}} aria-label={`View ${product.name}`}>
    <img src={product.image} alt={product.name}/>
    <div><span>Worn by the model</span><strong>{product.name}</strong><small>{product.price.toFixed(2)} JOD</small></div><ArrowUpRight className="landing-product-arrow" size={20}/>
   </motion.a>}
   <motion.div className="landing-copy" style={reduce?{}:{opacity}} initial={reduce?false:{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.8,ease:[.16,1,.3,1]}}>
-   <a href="/shop">Visit our products <ArrowUpRight size={18}/></a>
+   <a href="/products">{settings.campaignCta||'Visit our products'} <ArrowUpRight size={18}/></a>
   </motion.div>
  </section>;
 }
