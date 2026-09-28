@@ -21,9 +21,9 @@
 .landing-header .desktop-nav a:hover{background:rgba(17,17,17,.92);color:#fff;text-decoration:none}
 .landing-header .desktop-nav a:active{transform:scale(.97);transition-duration:.1s}
 .landing-header .header-actions{grid-column:3;grid-row:1;justify-self:end}
-.hero.landing-hero{position:relative;width:calc(100% - 36px);height:auto;aspect-ratio:1672/941;min-width:0;min-height:0;max-height:none;margin:18px;background:#fff!important;color:#111;isolation:isolate;border:0;border-radius:0;overflow:hidden}
+.hero.landing-hero{position:relative;width:calc(100% - 36px);height:calc(100svh - 36px);aspect-ratio:auto;min-width:0;min-height:0;max-height:none;margin:18px;background:#fff!important;color:#111;isolation:isolate;border:0;border-radius:0;overflow:hidden}
 /* Clip only the baked-in outer frame. Keep the original campaign pixels intact. */
-.landing-artwork{position:absolute;inset:0;background:url('/media/ttil-campaign-heritage-v5.png') center/100% 100% no-repeat;pointer-events:none}
+.landing-artwork{position:absolute;inset:0;background:url('/media/ttil-campaign-heritage-v5.png') center/contain no-repeat;pointer-events:none}
 .landing-wordmark{position:absolute;z-index:2;left:2.4%;right:2.4%;top:27.5%;width:auto;max-width:none!important;font-family:'Arial Black','Manrope Variable',Manrope,sans-serif;font-size:clamp(58px,8.45vw,158px)!important;line-height:.82;font-weight:900;letter-spacing:-.067em;color:#050505;text-align:center;text-transform:uppercase;white-space:nowrap;font-variation-settings:'wght' 900}
 .landing-model-wrap{position:absolute;z-index:4;left:50%;top:64px;bottom:0;width:min(43vw,760px);transform:translateX(-50%);display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
 .landing-model-wrap>img{position:relative;z-index:2;width:auto;height:100%;max-width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 12px 10px rgba(18,20,22,.12))}
