@@ -4,6 +4,7 @@ import { createHash, createHmac, randomBytes, randomUUID, scryptSync, timingSafe
 
 const FALLBACK_SECRET='gU0HSj39HwRrLzMZ-_-3QoJe5vtvzZh3c1QUQ3BSrW4zEd8xd_7IU9YFMk7Z63_E';
 const store=()=>getStore({name:'ttil-commerce',consistency:'strong'});
+const presenceStore=()=>getStore({name:'ttil-presence',consistency:'strong'});
 const env=(key)=>globalThis.Netlify?.env?.get(key)||process.env[key]||'';
 const supabase=()=>{const url=env('SUPABASE_URL'),key=env('SUPABASE_SERVICE_ROLE_KEY');return url&&key?createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}}):null;};
 const MEDIA_BUCKET='ttil-media';
@@ -73,7 +74,8 @@ export default async (req,context)=>{
   const path=routePath(req);
   if(req.method==='GET'&&path.startsWith('/media/')){const data=await readMedia(path.slice(7));return data?new Response(data,{headers:{'Content-Type':'image/webp','Cache-Control':'public, max-age=31536000, immutable','X-Content-Type-Options':'nosniff'}}):json({error:'Image not found.'},404);}
   const state=await load();
-  if(req.method==='GET'&&path==='/catalog')return json({products:state.products.filter(p=>p.status==='active').sort((a,b)=>a.sort-b.sort),settings:state.settings});
+  if(req.method==='GET'&&path==='/catalog'){const settings={...state.settings},promo=settings.promo,d=state.discounts.find(x=>x.code===promo?.code);if(promo?.enabled&&(!d?.active||d.ends&&new Date(`${d.ends}T23:59:59Z`)<new Date()||d.limit&&d.used>=d.limit))settings.promo={...promo,enabled:false};return json({products:state.products.filter(p=>p.status==='active').sort((a,b)=>a.sort-b.sort),settings});}
+  if(req.method==='POST'&&path==='/presence'){const b=await body(req),id=clean(b.id,80),page=clean(b.page,80);if(!/^[a-f0-9-]{36}$/.test(id)||!/^\/(?:products(?:\/[a-z0-9-]+)?|shop|journal|our-story)?$/.test(page))throw fault('Invalid visit.');await presenceStore().setJSON(`visits/${id}`,{seen:Date.now(),page,cart:!!b.cart,checkout:!!b.checkout});return json({ok:true});}
   if(req.method==='POST'&&path==='/quote'){const b=await body(req);return json(quote(state,b.items,b.code));}
   if(req.method==='POST'&&path==='/login'){
    const b=await body(req),key=createHash('sha256').update(context.ip||'unknown').digest('hex'),rate=state.rates[key];
@@ -92,6 +94,8 @@ export default async (req,context)=>{
   if(!path.startsWith('/admin/'))throw fault('Endpoint not found.',404);
   const a=auth(req,state,!['GET','HEAD'].includes(req.method));
   if(req.method==='GET'&&path==='/admin/data')return json({products:[...state.products].sort((x,y)=>x.sort-y.sort),orders:state.orders,discounts:state.discounts,settings:state.settings,activity:state.activity.slice(0,50),users:state.users.map(({username})=>({username}))});
+  if(req.method==='GET'&&path==='/admin/live'){const s=presenceStore(),listed=await s.list({prefix:'visits/'}),items=await Promise.all(listed.blobs.map(async x=>({key:x.key,value:await s.get(x.key,{type:'json'})}))),active=items.filter(x=>x.value?.seen>Date.now()-180000),counts=new Map();for(const {value} of active)counts.set(value.page,(counts.get(value.page)||0)+1);await Promise.all(items.filter(x=>!x.value||x.value.seen<Date.now()-3600000).slice(0,50).map(x=>s.delete(x.key)));return json({visitors:active.length,activeCarts:active.filter(x=>x.value.cart).length,checkingOut:active.filter(x=>x.value.checkout).length,pages:[...counts].sort((a,b)=>b[1]-a[1]).slice(0,5).map(([page,n])=>({page,n})),windowSeconds:180,asOf:now()});}
+  if(req.method==='PUT'&&path==='/admin/promo'){const b=await body(req),d=state.discounts.find(x=>x.code===clean(b.code,30).toUpperCase()&&x.active);if(b.enabled&&!d)throw fault('Choose an active discount code before enabling the popup.');const promo={enabled:!!b.enabled,code:d?.code||'',title:clean(b.title,90),body:clean(b.body,240),button:clean(b.button,40)||'Shop the collection',delay:Math.max(2,Math.min(30,Number(b.delay)||8))};if(promo.enabled&&(!promo.title||!promo.body))throw fault('Add a title and message.');state.settings.promo=promo;log(state,a.user.username,`Updated promotion popup: ${promo.enabled?'on':'off'}`);await save(state);return json(promo);}
   if(req.method==='GET'&&path==='/admin/export')return json({exportedAt:now(),products:state.products,orders:state.orders,discounts:state.discounts,settings:state.settings},200,{'Content-Disposition':'attachment; filename="ttil-store-export.json"'});
   if(req.method==='POST'&&path==='/admin/media'){
    const type=req.headers.get('content-type')||'';if(!['image/png','image/jpeg','image/webp'].includes(type))throw fault('Upload a JPG, PNG or WebP photo under 6 MB.');const bytes=new Uint8Array(await req.arrayBuffer());if(bytes.length<12||bytes.length>6*1024*1024)throw fault('Upload a JPG, PNG or WebP photo under 6 MB.');const {default:sharp}=await import('sharp');let image;try{image=await sharp(bytes,{limitInputPixels:40e6}).rotate().resize(2400,2400,{fit:'inside',withoutEnlargement:true}).webp({quality:86}).toBuffer();}catch{throw fault('This image could not be read. Please use another photo.');}const name=`${randomUUID()}.webp`;await writeMedia(name,image);return json({url:`/api/media/${name}`},201);
