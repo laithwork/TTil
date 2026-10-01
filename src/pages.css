@@ -114,3 +114,69 @@
 .promo-close{position:absolute;right:18px;top:18px;color:#f6f4eb;border:1px solid #6e7668;width:34px;height:34px;display:grid;place-items:center;border-radius:50%}.promo-mark{font-size:62px;line-height:1;color:#e5df52;margin:25px 0 10px}.promo-popup h2{font-size:clamp(28px,5vw,44px);font-weight:750;letter-spacing:-.055em}.promo-popup p{color:#c7cec3;font-size:13px;margin:15px 0 25px}.promo-code{border-top:1px solid #495244;padding:17px 0;font-size:12px}.promo-code strong{font-size:18px;letter-spacing:.1em;margin-left:7px;color:#e5df52}.promo-popup>a{display:flex;justify-content:space-between;align-items:center;background:#e5df52;color:#1b201a;border-radius:999px;padding:14px 18px;font-size:12px;font-weight:700;transition:transform .2s,background .2s}.promo-popup>a:hover{background:#f0ec7e;text-decoration:none;transform:translateY(-2px)}.promo-popup>small{display:block;color:#aab3a7;margin-top:14px;font-size:9px}
 @media(max-width:760px){.promo-editor-grid,.live-body{grid-template-columns:1fr}.promo-editor-grid{padding:18px;gap:18px}.live-body{gap:15px}.live-visitors.compact .live-body{flex-wrap:wrap;gap:14px}.theme-toggle{padding:6px 8px;font-size:10px}.promo-popup{padding:28px}}
 @media(prefers-reduced-motion:reduce){.admin-layout .admin-content,.live-beacon,.promo-scrim,.promo-popup{animation:none!important}.admin-layout *{transition-duration:.01ms!important}}
+
+/* Operations surfaces: neutral materials and readable status, in both themes. */
+.admin-layout{--admin-bg:#f5f5f7;--admin-surface:#fafafa;--admin-panel:#fff;--admin-text:#1d1d1f;--admin-subtle:#626268;--admin-border:rgba(0,0,0,.11);--admin-hover:#f0f0f2;--admin-input:#fff;--admin-danger:#b42318;--admin-danger-bg:#fff0ee;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.admin-layout.admin-dark{--admin-bg:#000;--admin-surface:#050505;--admin-panel:#0a0a0a;--admin-text:#f5f5f7;--admin-subtle:#a1a1a6;--admin-border:rgba(255,255,255,.14);--admin-hover:#171717;--admin-input:#111;--admin-danger:#ff6961;--admin-danger-bg:#341614;--ink:#f5f5f7;--muted:#a1a1a6;--line:rgba(255,255,255,.14)}
+.admin-layout .admin-sidebar{overflow-x:hidden}.admin-layout .admin-sidebar nav{min-width:0;overflow-x:hidden}
+.admin-layout .badge-sold-out,.admin-layout .badge-cancelled{background:var(--admin-danger-bg);color:var(--admin-danger);border:1px solid color-mix(in srgb,var(--admin-danger) 28%,transparent);font-weight:700}
+.admin-layout .badge-low-stock,.admin-layout .badge-pending,.admin-layout .badge-unpaid{background:#fff5dc;color:#805a00;font-weight:650}
+.admin-dark .badge-low-stock,.admin-dark .badge-pending,.admin-dark .badge-unpaid{background:#382a08;color:#ffd966}
+.admin-dark .badge-paid,.admin-dark .badge-fulfilled,.admin-dark .badge-active,.admin-dark .badge-in-stock{background:#15331e;color:#62dd80}
+.admin-dark .badge-confirmed{background:#132e3c;color:#78d6ff}
+.admin-layout .low-stock .badge-sold-out{box-shadow:0 0 0 1px color-mix(in srgb,var(--admin-danger) 12%,transparent)}
+.admin-layout .low-stock>div,.admin-layout .mini-products>button,.admin-layout .panel-heading{border-color:var(--admin-border)}
+.admin-layout .low-stock small,.admin-layout .mini-products small,.admin-layout .activity-list small{color:var(--admin-subtle)}
+.admin-dark .store-switch,.admin-dark .admin-sidebar nav>button.active,.admin-dark .avatar,.admin-dark .setup-notice,.admin-dark .notice,.admin-dark .admin-tabs button.active{background:#1d1d1f;color:var(--admin-text);border-color:var(--admin-border)}
+.admin-dark .admin-sidebar nav>button.active{box-shadow:inset 3px 0 #e5df52}
+.admin-dark .table-wrap th{background:#111;color:var(--admin-subtle)}
+.admin-dark .table-wrap td,.admin-dark .orders-toolbar,.admin-dark .orders-result-count{border-color:var(--admin-border)}
+.admin-dark .admin-layout .button,.admin-dark .button:not(.secondary){background:#e5df52;color:#11110a}
+.admin-dark .button:not(.secondary):hover{background:#f0eb70}
+
+/* Orders: the counts are controls, not glaring white cards. */
+.orders-metrics>button{appearance:none;min-width:0;padding:18px 20px;text-align:left;border:1px solid var(--admin-border);border-radius:14px;background:var(--admin-panel);color:var(--admin-text);transition:background-color .18s ease,border-color .18s ease,transform .12s ease}
+.orders-metrics>button:hover{background:var(--admin-hover)}
+.orders-metrics>button:active{transform:scale(.985)}
+.orders-metrics>button.selected{border-color:var(--admin-text)}
+.orders-metrics>button span,.orders-metrics>button small{display:block;color:var(--admin-subtle);font-size:12px;line-height:1.4}
+.orders-metrics>button strong{display:block;margin:8px 0 4px;font-size:32px;line-height:1;font-weight:700;letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:var(--admin-text)}
+.orders-panel{background:var(--admin-panel);border-color:var(--admin-border)}
+.orders-toolbar{gap:16px;align-items:stretch;flex-wrap:wrap;border-color:var(--admin-border)}
+.order-filters{max-width:100%;flex:1 1 500px;gap:3px;scrollbar-width:thin}
+.order-filters button{color:var(--admin-subtle);font-size:12px;font-weight:600;min-height:40px}
+.order-filters button:hover{background:var(--admin-hover);color:var(--admin-text)}
+.order-filters button.active,.admin-dark .order-filters button.active{background:var(--admin-hover);color:var(--admin-text)}
+.order-filters button span{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:21px;margin-left:7px;padding:0 5px;background:var(--admin-hover);border-radius:999px;color:var(--admin-text);font-size:11px;font-variant-numeric:tabular-nums}
+.order-filters button.active span{background:var(--admin-panel)}
+.orders-controls{display:flex;align-items:center;gap:10px;flex:0 1 430px;min-width:0}
+.orders-toolbar .table-search{min-width:180px;max-width:none;margin:0;flex:1 1 auto;background:var(--admin-input);border-color:var(--admin-border);color:var(--admin-subtle)}
+.orders-toolbar .table-search input{color:var(--admin-text);font-size:12px}
+.orders-toolbar .table-search input::placeholder{color:var(--admin-subtle)}
+.orders-sort{display:flex;align-items:center;gap:8px;flex:none;color:var(--admin-subtle);font-size:12px}
+.orders-sort select{height:39px;max-width:150px;border:1px solid var(--admin-border);border-radius:8px;background:var(--admin-input);color:var(--admin-text);padding:0 9px;font-size:12px}
+.orders-result-count{padding:11px 20px;border-bottom:1px solid var(--admin-border);color:var(--admin-subtle);font-size:12px}
+.orders-table th{position:sticky;top:0;z-index:1;background:var(--admin-hover);color:var(--admin-subtle);font-size:11px}
+.orders-table td{color:var(--admin-text);font-size:12px;white-space:nowrap}
+.orders-table td:nth-child(3){white-space:normal;min-width:170px}
+.orders-table td strong{color:var(--admin-text);font-size:12px}
+.orders-table td small{color:var(--admin-subtle);font-size:11px}
+.orders-table td:last-child{font-weight:650;font-variant-numeric:tabular-nums}
+.orders-table td:last-child small{display:inline;margin-left:3px;color:var(--admin-subtle);font-size:11px}
+.orders-table .order-link{color:var(--admin-text);font-size:12px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
+.orders-table .order-link:hover{text-decoration-color:currentColor}
+.orders-mobile-list{display:none}
+.orders-empty,.orders-empty h2{color:var(--admin-text)}
+.orders-empty p{color:var(--admin-subtle)}
+.admin-layout .order-panel{background:var(--admin-panel);color:var(--admin-text);border-color:var(--admin-border)}
+.admin-layout .order-panel-heading svg,.admin-layout .customer-facts svg{color:var(--admin-subtle)}
+.admin-layout .order-panel :is(.order-line-item span,.order-line-item small,.order-summary-rows span,.customer-facts,.order-detail-aside h3,.payment-summary span,.order-timeline small),.admin-layout .order-detail-nav,.admin-layout .order-page-heading p{color:var(--admin-subtle)}
+.admin-layout .order-line-item,.admin-layout .order-summary-rows .total{border-color:var(--admin-border)}
+.admin-layout .order-summary-rows .total span,.admin-layout .order-back{color:var(--admin-text)}
+.admin-layout .order-context{background:var(--admin-hover);color:var(--admin-text);border-color:var(--admin-border)}
+.admin-dark .order-actionbar .danger{background:var(--admin-danger-bg);color:var(--admin-danger);border-color:var(--admin-danger)}
+.admin-layout :is(.orders-metrics>button,.order-filters button,.orders-sort select,.orders-mobile-card,.order-link):focus-visible{outline:2px solid var(--admin-text);outline-offset:2px}
+@media(max-width:980px){.orders-controls{flex:1 1 100%;}.orders-toolbar .table-search{margin:0}}
+@media(max-width:700px){.orders-metrics{gap:8px;margin-bottom:16px}.orders-metrics>button{padding:12px;min-height:88px}.orders-metrics>button strong{font-size:25px}.orders-metrics>button span{font-size:11px}.orders-metrics>button small{display:none}.orders-toolbar{padding:12px}.order-filters{flex-basis:100%;overflow-x:auto;overscroll-behavior-inline:contain}.order-filters button{min-height:44px}.orders-controls{flex-wrap:wrap}.orders-sort{justify-content:space-between;width:100%}.orders-sort select{max-width:none;flex:1}.orders-desktop{display:none}.orders-mobile-list{display:grid;gap:0}.orders-mobile-card{display:grid;gap:9px;width:100%;padding:17px 16px;text-align:left;border:0;border-bottom:1px solid var(--admin-border);background:var(--admin-panel);color:var(--admin-text);font-size:13px}.orders-mobile-card:last-child{border-bottom:0}.orders-mobile-card:active{transform:scale(.99)}.orders-mobile-top,.orders-mobile-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}.orders-mobile-top strong{font-size:14px}.orders-mobile-top b{font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}.orders-mobile-customer{color:var(--admin-subtle);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.orders-mobile-status{display:flex;gap:7px}.orders-mobile-bottom{color:var(--admin-subtle);font-size:11px}}
+@media(prefers-reduced-motion:reduce){.orders-metrics>button,.orders-mobile-card{transition:none;transform:none!important}}
+@media(prefers-contrast:more){.admin-layout{--admin-border:rgba(0,0,0,.35)}.admin-layout.admin-dark{--admin-border:rgba(255,255,255,.4)}.orders-metrics>button.selected{outline:2px solid var(--admin-text)}}
