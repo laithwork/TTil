@@ -209,3 +209,59 @@
 .promo-form-title{font-size:12px;margin:23px 0 14px;padding-top:17px;border-top:1px solid var(--admin-border)}.promo-rule-note,.promo-preview-caption{font-size:11px;color:var(--admin-subtle);margin:10px 0 18px}.promo-editor input[type=color]{height:48px;padding:5px;cursor:pointer}.promo-preview-wrap{position:sticky;top:20px;align-self:start}.promo-preview,.promo-popup{--promo-accent:#e5df52;background:#171a16;color:#f6f4eb;border:1px solid #424b39;border-radius:20px}.promo-theme-light{background:#f5f5f2!important;color:#171a16!important;border-color:#cfd1ca!important}.promo-preview{min-height:420px;padding:34px;display:flex;flex-direction:column;align-items:stretch}.promo-preview .promo-kicker,.promo-popup .promo-kicker{color:inherit;opacity:.72}.promo-preview-mark,.promo-popup .promo-mark{color:var(--promo-accent);margin:26px 0 13px;display:block}.promo-preview h3{font-size:clamp(28px,3vw,38px);margin:0;letter-spacing:-.055em;line-height:1.05}.promo-preview p,.promo-popup p{color:inherit;opacity:.75;font-size:13px;line-height:1.5;margin:13px 0 23px}.promo-preview .promo-code,.promo-popup .promo-code{width:100%;margin-top:auto;border-top:1px solid currentColor;padding:16px 0;opacity:.9;font-size:12px}.promo-preview .promo-code strong,.promo-popup .promo-code strong{color:var(--promo-accent);font-size:17px;letter-spacing:.08em}.promo-preview-cta,.promo-popup>a{display:flex;align-items:center;justify-content:space-between;gap:15px;background:var(--promo-accent)!important;color:#111!important;border:0!important;border-radius:999px;padding:14px 18px;font-size:12px;font-weight:700;min-height:46px}.promo-fine-print{display:block;color:inherit!important;opacity:.62;font-size:10px!important;letter-spacing:normal!important;text-transform:none!important;margin-top:15px!important;line-height:1.4}.promo-theme-light .promo-code strong{color:#171a16}.promo-theme-light .promo-close{color:#171a16;border-color:#999}.promo-popup{width:min(490px,100%)}
 @media(max-width:760px){.finance-overview{flex-direction:column;align-items:flex-start;padding:24px}.finance-donut{width:170px;height:170px;align-self:center}.finance-donut>div{width:124px;height:124px}.finance-donut strong{font-size:34px}.finance-support{grid-template-columns:1fr}.finance-legend{grid-template-columns:1fr}.live-foot{flex-wrap:wrap}.live-foot small{margin-left:0}.promo-preview-wrap{position:static}}
 .promo-preview .promo-preview-cta,.promo-popup>a{color:var(--promo-on-accent,#111)!important}
+
+/* Admin legibility: readable type and deliberate contrast at ordinary browser zoom. */
+.admin-layout{--admin-subtle:#4c4c51;--admin-border:#c9c9cd;font-size:15px;line-height:1.5}
+.admin-layout.admin-dark{--admin-subtle:#c4c4c9;--admin-border:#38383d}
+.admin-layout .admin-brand>span:last-child,.admin-layout .store-switch small,.admin-layout .user-row small,.admin-layout .admin-sidebar-bottom>a,.admin-layout .admin-topbar,.admin-layout .topbar-right,.admin-layout .admin-footer{font-size:13px;color:var(--admin-subtle)}
+.admin-layout:not(.admin-dark) .admin-brand img{filter:brightness(0)}
+.admin-layout .admin-sidebar nav>button{font-size:14px;min-height:46px;color:var(--admin-text)}
+.admin-layout .admin-sidebar nav>button.active{font-weight:700}
+.admin-layout .store-switch,.admin-layout .user-row>span{font-size:14px}
+.admin-layout .page-head p,.admin-layout .muted,.admin-layout .small,.admin-layout .panel-heading p,.admin-layout .setup-notice,.admin-layout .visibility-panel p,.admin-layout .visibility-panel small{font-size:14px;line-height:1.5;color:var(--admin-subtle)}
+.admin-layout .page-head h1{font-size:clamp(30px,3vw,38px)}
+.admin-layout .panel-heading h2,.admin-layout .panel>h2,.admin-layout .padded>h2{font-size:18px;line-height:1.35}
+.admin-layout .panel-heading .text-link,.admin-layout .text-link,.admin-layout .button,.admin-layout .theme-toggle,.admin-layout .icon-button{font-size:14px}
+.admin-layout .button{min-height:44px}
+.admin-layout .field,.admin-layout .switch-row,.admin-layout .checkbox{font-size:14px;color:var(--admin-text)}
+.admin-layout .field>span{font-weight:650;color:var(--admin-text)}
+.admin-layout .field :is(input,select,textarea),.admin-layout .table-wrap input,.admin-layout .discount-input input,.admin-layout .orders-sort select{min-height:46px;font-size:14px;color:var(--admin-text)}
+.admin-layout .field :is(input,textarea)::placeholder,.admin-layout .table-search input::placeholder{color:var(--admin-subtle)}
+.admin-layout .switch-row small,.admin-layout .field small,.admin-layout .promo-rule-note,.admin-layout .promo-preview-caption{font-size:12px;line-height:1.5;color:var(--admin-subtle)}
+.admin-layout .table-wrap table{font-size:14px}
+.admin-layout .table-wrap th{font-size:12px;font-weight:700;color:var(--admin-subtle);background:var(--admin-hover)}
+.admin-layout .table-wrap td{font-size:14px;line-height:1.45;color:var(--admin-text)}
+.admin-layout .table-wrap :is(td,th){padding-block:16px}
+.admin-layout .table-product,.admin-layout .order-link,.admin-layout .orders-table td,.admin-layout .orders-table td strong,.admin-layout .orders-table .order-link{font-size:14px}
+.admin-layout .table-product small,.admin-layout .orders-table td small,.admin-layout .cell-note{font-size:12px;color:var(--admin-subtle)}
+.admin-layout .badge,.admin-layout .finance-payment,.admin-layout .promo-state{font-size:12px;font-weight:700;padding:6px 9px}
+.admin-layout .stat>span,.admin-layout .stat>small,.admin-layout .report-summary span,.admin-layout .report-summary small,.admin-layout .finance-support span,.admin-layout .finance-support small{font-size:13px;color:var(--admin-subtle)}
+.admin-layout .mini-products>button,.admin-layout .activity-list p,.admin-layout .low-stock>div,.admin-layout .ranking-row,.admin-layout .report-breakdown>div{font-size:14px}
+.admin-layout .mini-products small,.admin-layout .activity-list small,.admin-layout .low-stock small,.admin-layout .ranking-row strong,.admin-layout .report-breakdown small{font-size:12px;color:var(--admin-subtle)}
+.admin-layout .analytics-heading p,.admin-layout .analytics-legend,.admin-layout .analytics-panel .chart-note,.admin-layout .report-disclosure{font-size:13px;color:var(--admin-subtle)}
+.admin-layout .analytics-range button,.admin-layout .analytics-column>span,.admin-layout .order-filters button,.admin-layout .orders-sort,.admin-layout .orders-result-count{font-size:13px}
+.admin-layout .live-title small,.admin-layout .live-number span,.admin-layout .live-behavior span,.admin-layout .live-pages h3,.admin-layout .live-pages>div,.admin-layout .live-pages p,.admin-layout .live-foot,.admin-layout .live-foot small{font-size:13px;color:var(--admin-subtle)}
+.admin-layout .finance-donut span,.admin-layout .finance-eyebrow,.admin-layout .finance-overview-copy>p,.admin-layout .finance-legend span{font-size:13px;color:var(--admin-subtle)}
+.admin-layout .promo-form-title{font-size:16px}.admin-layout .promo-editor .panel-heading p,.admin-layout .promo-preview-wrap>span{font-size:13px;color:var(--admin-subtle)}
+.admin-layout .promo-preview .promo-fine-print{font-size:12px!important;opacity:.8}
+.admin-layout .promo-preview .promo-kicker{font-size:12px}
+.admin-layout .promo-preview p,.admin-layout .promo-preview .promo-code,.admin-layout .promo-preview-cta{font-size:14px}
+.admin-layout .workspace-search input,.admin-layout .table-search>input{font-size:14px;color:var(--admin-text)}
+@media(max-width:700px){.admin-layout{font-size:14px}.admin-layout .field :is(input,select,textarea){font-size:16px}.admin-layout .page-head p{font-size:14px}.admin-layout .admin-topbar{font-size:12px}.admin-layout .finance-overview-copy h2{font-size:36px}}
+
+/* Native dialogs must inherit the selected Studio theme; they do not inherit
+   the admin surface merely because their trigger lives in the dashboard. */
+.admin-layout dialog.modal{font-size:15px;background:var(--admin-panel);color:var(--admin-text);border:1px solid var(--admin-border);border-radius:16px}
+.admin-layout dialog.modal .modal-top,.admin-layout dialog.modal .modal-actions{border-color:var(--admin-border)}
+.admin-layout dialog.modal .modal-top h2{font-size:21px;font-weight:700;color:var(--admin-text)}
+.admin-layout dialog.modal .modal-top .icon-button{color:var(--admin-text)}
+.admin-layout dialog.modal .modal-top .icon-button:hover{background:var(--admin-hover)}
+.admin-layout dialog.modal .field :is(input,select,textarea){background:var(--admin-input);color:var(--admin-text);border:1px solid var(--admin-border)}
+.admin-layout dialog.modal .field :is(input,select,textarea)::placeholder{color:var(--admin-subtle);opacity:1}
+.admin-layout dialog.modal :is(.checkbox,.switch-row,.modal-shell,.compact-form){color:var(--admin-text)}
+.admin-layout dialog.modal .editor-grid aside,.admin-layout dialog.modal .order-summary,.admin-layout dialog.modal .upload-zone{background:var(--admin-hover);color:var(--admin-text);border-color:var(--admin-border)}
+.admin-layout dialog.modal .upload-zone :is(strong,small),.admin-layout dialog.modal .order-summary small,.admin-layout dialog.modal .summary-line{color:var(--admin-text)}
+.admin-layout dialog.modal .notice{background:var(--admin-hover);color:var(--admin-text)}
+.admin-layout dialog.modal .form-error{color:var(--admin-danger);font-size:14px}
+.admin-layout dialog.modal .checkbox{font-size:14px}
+.admin-layout dialog.modal .modal-actions .button.secondary{background:var(--admin-panel);color:var(--admin-text);border-color:var(--admin-border)}
